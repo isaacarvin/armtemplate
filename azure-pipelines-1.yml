@@ -21,6 +21,6 @@ steps:
       resourceGroupName: 'arvinmyrg'
       location: 'East US'
       templateLocation: 'Linked artifact'
-      csmFile: 'resource_group/azuredeploy.json'
-      csmParametersFile: 'resource_group/metadata.json'
+      csmFile: 'resource-group/azuredeploy.json'
+      csmParametersFile: 'resource-group/metadata.json'
       deploymentMode: 'Validation'
