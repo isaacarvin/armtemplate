@@ -18,7 +18,7 @@ steps:
       azureResourceManagerConnection: 'spn'
       subscriptionId: '3c04e122-5492-401c-9c2f-947eccf22a11'
       action: 'Create Or Update Resource Group'
-      resourceGroupName: 'arvinmyrg'
+      resourceGroupName: 'arvinmyrg1'
       location: 'East US'
       templateLocation: 'Linked artifact'
       csmFile: 'resource-group/azuredeploy.json'
