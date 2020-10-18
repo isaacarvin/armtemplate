@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- "*"
+
+stages:
+  - stage: test
+    jobs:
+      - job: 'validateandtest'
+        pool:
+          vmimage: windows-latest
+        steps:
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              deploymentScope: 'Resource Group'
+              azureResourceManagerConnection: 'spn'
+              subscriptionId: '3c04e122-5492-401c-9c2f-947eccf22a11'
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: 'arvinmyrg'
+              location: 'East US'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(Build.SourcesDirectory)/StorageAccount/azuredeploy.json'
+              csmParametersFile: '$(Build.SourcesDirectory)/StorageAccount/azuredeployparameters.json'
+              deploymentMode: 'Validation'
+          - task: AzurePowerShell@5
+            inputs:
+              azureSubscription: 'spn'
+              ScriptType: 'InlineScript'
+              Inline: 'Install-Module Az.Resources -RequiredVersion 1.12.1-preview -AllowPrerelease -Force -Scope CurrentUser'
+              azurePowerShellVersion: 'LatestVersion'
