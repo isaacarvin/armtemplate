@@ -1,0 +1,21 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+    - '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: 'spn'
+      scriptType: 'bash'
+      scriptLocation: 'scriptPath'
+      scriptPath: 'resource-group/deploy.sh'
+      arguments: '-a 3c04e122-5492-401c-9c2f-947eccf22a11 -b rgNetwork -c arvinmy2019RG -d westeurope'
